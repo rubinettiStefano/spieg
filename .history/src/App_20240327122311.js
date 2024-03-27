@@ -1,30 +1,32 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Person from "./Person";
 import Subject from "./Subject";
 import 'bootstrap/dist/css/bootstrap.css';
-import axios, { Axios } from "axios";
 
 function App() 
 {
 
-  let [people,setPeople] =useState([]);
-
-  useEffect(
-    function()
+  let [people,setPeople] =useState([
     {
-      axios.get("/people").then((response)=>setPeople(response.data));
+      id:1,
+      name:"Stefano",
+      surname:"Rubinetti",
+      age:28
     },
-    []
-  );
+    {
+      id:2,
+      name:"Viktoriya",
+      surname:"Shnurovska",
+      age:23
+    }
+  ]);
 
   function changeAge(id,newAge)
   {
     let clone = [...people];
     let pos = clone.findIndex(p=>p.id==id);
     clone[pos].age = newAge;
-    axios.put(`/people/${clone[pos].id}`,clone[pos]);
     setPeople(clone);
-
   }
 
 

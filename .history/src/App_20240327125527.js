@@ -22,7 +22,7 @@ function App()
     let clone = [...people];
     let pos = clone.findIndex(p=>p.id==id);
     clone[pos].age = newAge;
-    axios.put(`/people/${clone[pos].id}`,clone[pos]);
+    axios.put("/people/"+clone[pos].id,JSON.stringify(clone[pos]));
     setPeople(clone);
 
   }

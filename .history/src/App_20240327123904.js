@@ -2,19 +2,31 @@ import { useEffect, useState } from "react";
 import Person from "./Person";
 import Subject from "./Subject";
 import 'bootstrap/dist/css/bootstrap.css';
-import axios, { Axios } from "axios";
 
 function App() 
 {
 
-  let [people,setPeople] =useState([]);
+  let [people,setPeople] =useState([
+    {
+      id:1,
+      name:"Stefano",
+      surname:"Rubinetti",
+      age:28
+    },
+    {
+      id:2,
+      name:"Viktoriya",
+      surname:"Shnurovska",
+      age:23
+    }
+  ]);
 
   useEffect(
     function()
     {
-      axios.get("/people").then((response)=>setPeople(response.data));
+      console.log("People è cambiata e io vengo stampato");
     },
-    []
+    [people]
   );
 
   function changeAge(id,newAge)
@@ -22,9 +34,7 @@ function App()
     let clone = [...people];
     let pos = clone.findIndex(p=>p.id==id);
     clone[pos].age = newAge;
-    axios.put(`/people/${clone[pos].id}`,clone[pos]);
     setPeople(clone);
-
   }
 
 

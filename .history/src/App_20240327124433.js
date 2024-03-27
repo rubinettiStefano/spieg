@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Person from "./Person";
 import Subject from "./Subject";
 import 'bootstrap/dist/css/bootstrap.css';
-import axios, { Axios } from "axios";
+import axios from "axios";
 
 function App() 
 {
@@ -12,7 +12,7 @@ function App()
   useEffect(
     function()
     {
-      axios.get("/people").then((response)=>setPeople(response.data));
+      axios.get("localhost:4000/people").then((response)=>setPeople(response.data));
     },
     []
   );
@@ -22,9 +22,7 @@ function App()
     let clone = [...people];
     let pos = clone.findIndex(p=>p.id==id);
     clone[pos].age = newAge;
-    axios.put(`/people/${clone[pos].id}`,clone[pos]);
     setPeople(clone);
-
   }
 
 
